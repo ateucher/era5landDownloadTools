@@ -174,8 +174,9 @@ cds_auth <- function(user) {
 }
 
 format_bounds <- function(aoi) {
-  paste(sf::st_bbox(aoi)[4] %>% as.numeric() %>% round(2),
-        sf::st_bbox(aoi)[1] %>% as.numeric() %>% round(2),
-        sf::st_bbox(aoi)[2] %>% as.numeric() %>% round(2),
-        sf::st_bbox(aoi)[3] %>% as.numeric() %>% round(2), sep = "/")
+  bbox <- sf::st_bbox(sf::st_transform(aoi, 4326))
+  paste(bbox[4] %>% as.numeric() %>% round(2),
+        bbox[1] %>% as.numeric() %>% round(2),
+        bbox[2] %>% as.numeric() %>% round(2),
+        bbox[3] %>% as.numeric() %>% round(2), sep = "/")
 }
